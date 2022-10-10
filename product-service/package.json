@@ -28,6 +28,7 @@
   },
   "author": "Hanna Herman",
   "dependencies": {
+    "serverless-auto-swagger": "^2.9.2",
     "ts-loader": "^9.4.1"
   }
 }
