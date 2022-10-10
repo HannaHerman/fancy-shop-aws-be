@@ -1,8 +1,7 @@
 import { productList } from './products';
 import { headers } from '../core/constants/constants';
-import { APIGatewayProxyHandler } from 'aws-lambda';
 
-export const getProductsList: APIGatewayProxyHandler = async () => {
+export const getProductsList = async () => {
   return {
     headers,
     statusCode: 200,

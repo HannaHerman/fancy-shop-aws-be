@@ -1,8 +1,7 @@
 import { productList } from './products';
 import { headers } from '../core/constants/constants';
-import { APIGatewayProxyEvent, APIGatewayProxyHandler } from 'aws-lambda';
 
-export const getProductsById: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent) => {
+export const getProductsById = async (event: any) => {
   const productId = event?.pathParameters?.productId;
   const targetProduct = productList.find(el => el.id === productId);
   if (targetProduct) {
