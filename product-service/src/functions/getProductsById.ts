@@ -4,6 +4,10 @@ import { get } from '../utils/get-from-client';
 
 export const getProductsById = async (event: any): Promise<any> => {
   try {
+     // For testing
+     const error = event?.queryStringParameters?.error;
+     if (error && Boolean(error)) throw new Error('Test 500 error');
+     
     const ddb = new AWS.DynamoDB.DocumentClient();
     const productId = event?.pathParameters?.productId;
     console.log('Product id from request: ', productId);

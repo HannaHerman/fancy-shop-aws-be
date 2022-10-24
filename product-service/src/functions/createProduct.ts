@@ -6,6 +6,10 @@ import { v4 } from 'uuid';
 
 export const createProduct = async (event: any): Promise<any> => {
   try {
+    // For testing
+    const error = event?.queryStringParameters?.error;
+    if (error && Boolean(error)) throw new Error('Test 500 error');
+
     const ddb = new AWS.DynamoDB.DocumentClient();
     const { body }: any = event;
     const product = JSON.parse(body);

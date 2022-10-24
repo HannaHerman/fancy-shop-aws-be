@@ -2,8 +2,12 @@ import * as AWS from 'aws-sdk';
 import { headers } from '../core/constants/constants';
 import { scan } from '../utils/scan-client';
 
-export const getProductsList = async (): Promise<any> => {
+export const getProductsList = async (event: any): Promise<any> => {
   try {
+     // For testing
+     const error = event?.queryStringParameters?.error;
+     if (error && Boolean(error)) throw new Error('Test 500 error');
+
     const ddb = new AWS.DynamoDB.DocumentClient();
     const productsParams = { TableName: process.env.PRODUCTS_TABLE_NAME };
     const stocksParams = { TableName: process.env.STOCKS_TABLE_NAME };
