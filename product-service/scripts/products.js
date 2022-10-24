@@ -1,4 +1,4 @@
-const productList = [
+export const productList = [
   {
     "id": "14b03511-4af0-433a-82da-3cf16c8f96e7",
     "title": "Bear",
