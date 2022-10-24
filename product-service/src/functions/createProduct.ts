@@ -28,7 +28,7 @@ export const createProduct = async (event: any): Promise<any> => {
           {
             Put: {
               TableName: process.env.STOCKS_TABLE_NAME,
-              // ConditionExpression: "attribute_not_exists(product_id)",
+              ConditionExpression: "attribute_not_exists(product_id)",
               Item: {
                 product_id: { S: productItem.id },
                 count: { N: product.count },
