@@ -5,6 +5,7 @@ frameworkVersion: '3'
 plugins:
   - serverless-webpack
   - serverless-auto-swagger
+  - serverless-dotenv-plugin
 
 custom:
   webpack:
@@ -12,15 +13,14 @@ custom:
     includeModules: true
     packager: 'npm'
   autoswagger:
-    generateSwaggerOnDeploy: false
+    generateSwaggerOnDeploy: true
     typefiles: src/types/api-types.d.ts
-
+useDotenv: true
 provider:
   name: aws
   runtime: nodejs16.x
   stage: dev
   region: eu-west-1
-
 functions:
   getProductsList:
     handler: src/functions/index.getProductsList
@@ -35,4 +35,11 @@ functions:
       - http:
           path: products/{productId}
           method: get
+          cors: true
+  createProduct:
+    handler: src/functions/index.createProduct
+    events:
+      - http:
+          path: products
+          method: post
           cors: true
