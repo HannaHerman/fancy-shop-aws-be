@@ -13,8 +13,6 @@
     "node": ">=14.15.0"
   },
   "dependencies": {
-    "@middy/core": "^3.6.2",
-    "@middy/http-json-body-parser": "^3.6.2",
     "ts-loader": "^9.4.1",
     "aws-sdk": "^2.1244.0",
     "csv-parser": "^3.0.0"
