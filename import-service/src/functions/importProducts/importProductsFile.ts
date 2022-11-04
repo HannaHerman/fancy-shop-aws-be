@@ -1,5 +1,8 @@
 import * as AWS from 'aws-sdk';
 import { headers } from '../../core/constants/constants';
+const S3 = new AWS.S3({
+  region: 'eu-west-1',
+});
 
 export const importProductsFile = async (event: any) => {
   console.log(
@@ -14,9 +17,6 @@ export const importProductsFile = async (event: any) => {
       throw new Error('Name is not found');
     }
 
-    const s3 = new AWS.S3({
-      region: 'eu-west-1',
-    });
     const filePath = `uploaded/${name}`;
 
     const params = {
@@ -26,7 +26,7 @@ export const importProductsFile = async (event: any) => {
       ContentType: 'text/csv',
     };
 
-    const signedUrl = await s3.getSignedUrlPromise('putObject', params);
+    const signedUrl = await S3.getSignedUrlPromise('putObject', params);
     console.log('importProductsFile finished');
     
     return {

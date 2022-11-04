@@ -2,6 +2,9 @@ import * as AWS from 'aws-sdk';
 import * as csvParser from 'csv-parser';
 import { headers } from '../../core/constants/constants';
 const BUCKET = 'fancy-import-service';
+const S3 = new AWS.S3({
+  region: 'eu-west-1',
+});
 
 export const importFileParser = async (event: any) => {
   console.log(
@@ -10,12 +13,8 @@ export const importFileParser = async (event: any) => {
   );
 
   try {
-    const s3 = new AWS.S3({
-      region: 'eu-west-1',
-    });
-
     for (const record of event.Records) {
-      const s3Stream = s3
+      const s3Stream = S3
         .getObject({
           Bucket: BUCKET,
           Key: record.s3.object.key,
@@ -43,7 +42,7 @@ export const importFileParser = async (event: any) => {
           });
       });
 
-      await s3
+      await S3
         .copyObject({
           Bucket: BUCKET,
           CopySource: `${BUCKET}/${record.s3.object.key}`,
@@ -53,14 +52,14 @@ export const importFileParser = async (event: any) => {
 
       console.log('importFileParser copy is done');
 
-      await s3
+      await S3
         .deleteObject({
           Bucket: BUCKET,
           Key: record.s3.object.key,
         })
         .promise();
     }
-    
+
     console.log('importFileParser finished');
 
     return {
