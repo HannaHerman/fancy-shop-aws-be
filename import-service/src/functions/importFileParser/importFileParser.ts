@@ -25,12 +25,6 @@ export const importFileParser = async (event: any) => {
       await new Promise<void>((resolve, reject) => {
         s3Stream
           .pipe(csvParser())
-          // .on('data', (data) => {
-          //   console.log(
-          //     'importFileParser csvParser data:',
-          //     data,
-          //   );
-          // })
           .on('data', (data: any) => {
             sqs.sendMessage(
               {
