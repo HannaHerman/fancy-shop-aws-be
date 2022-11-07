@@ -20,10 +20,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Successful API response",
-            "schema": {
-              "$ref": "#/definitions/ProductList"
-            }
+            "description": "200 response"
           }
         }
       },
@@ -40,10 +37,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Successful API response",
-            "schema": {
-              "$ref": "#/definitions/Product"
-            }
+            "description": "200 response"
           }
         }
       }
@@ -69,10 +63,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful API response",
-            "schema": {
-              "$ref": "#/definitions/Product"
-            }
+            "description": "200 response"
           }
         }
       }
@@ -81,33 +72,33 @@
   "definitions": {
     "Product": {
       "properties": {
-        "id": {
-          "title": "Product.id",
+        "\"id\"": {
+          "title": "Product.\"id\"",
           "type": "number"
         },
-        "title": {
-          "title": "Product.title",
+        "\"title\"": {
+          "title": "Product.\"title\"",
           "type": "string"
         },
-        "count": {
-          "title": "Product.count",
+        "\"count\"": {
+          "title": "Product.\"count\"",
           "type": "number"
         },
-        "description": {
-          "title": "Product.description",
+        "\"description\"": {
+          "title": "Product.\"description\"",
           "type": "string"
         },
-        "price": {
-          "title": "Product.price",
+        "\"price\"": {
+          "title": "Product.\"price\"",
           "type": "number"
         }
       },
       "required": [
-        "id",
-        "title",
-        "count",
-        "description",
-        "price"
+        "\"id\"",
+        "\"title\"",
+        "\"count\"",
+        "\"description\"",
+        "\"price\""
       ],
       "additionalProperties": false,
       "title": "Product",
