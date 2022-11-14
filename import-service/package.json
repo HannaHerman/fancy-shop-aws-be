@@ -13,9 +13,9 @@
     "node": ">=14.15.0"
   },
   "dependencies": {
-    "ts-loader": "^9.4.1",
     "aws-sdk": "^2.1244.0",
-    "csv-parser": "^3.0.0"
+    "csv-parser": "^3.0.0",
+    "ts-loader": "^9.4.1"
   },
   "devDependencies": {
     "@serverless/typescript": "^3.21.0",

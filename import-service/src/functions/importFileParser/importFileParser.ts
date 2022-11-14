@@ -5,6 +5,7 @@ const BUCKET = 'fancy-import-service';
 const S3 = new AWS.S3({
   region: 'eu-west-1',
 });
+const sqs = new AWS.SQS();
 
 export const importFileParser = async (event: any) => {
   console.log(
@@ -24,10 +25,19 @@ export const importFileParser = async (event: any) => {
       await new Promise<void>((resolve, reject) => {
         s3Stream
           .pipe(csvParser())
-          .on('data', (data) => {
-            console.log(
-              'importFileParser csvParser data:',
-              data,
+          .on('data', (data: any) => {
+            sqs.sendMessage(
+              {
+                QueueUrl: process.env.SQS_URL,
+                MessageBody: JSON.stringify(data),
+              },
+              (error: any, data: any) => {
+                if (error) {
+                  console.log('error', error);
+                  return;
+                }
+                console.log(data.MessageId);
+              }
             );
           })
           .on('error', (error) => {

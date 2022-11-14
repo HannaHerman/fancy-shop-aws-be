@@ -21,6 +21,14 @@ provider:
   runtime: nodejs16.x
   stage: dev
   region: eu-west-1
+  iam:
+    role:
+      statements:
+        - Effect: "Allow"
+          Action:
+            - "sns:*"
+          Resource: 
+            Ref: SNSTopic
 functions:
   getProductsList:
     handler: src/functions/index.getProductsList
@@ -43,3 +51,28 @@ functions:
           path: products
           method: post
           cors: true
+  catalogBatchProcess:
+    handler: src/functions/index.catalogBatchProcess
+    events:
+      - sqs:
+          arn: 
+            Fn::GetAtt: [ SQSQueue, Arn ]
+          batchSize: 5
+
+resources:
+  Resources:
+    SQSQueue:
+      Type: AWS::SQS::Queue
+      Properties:
+        QueueName: catalogItemsQueue
+    SNSTopic:
+      Type: AWS::SNS::Topic
+      Properties:
+        TopicName: createProductsTopic
+    SNSSubscription:
+      Type: AWS::SNS::Subscription
+      Properties:
+        Endpoint: mrshannaherman@gmail.com
+        Protocol: email
+        TopicArn:
+          Ref: SNSTopic
