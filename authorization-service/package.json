@@ -1,7 +1,7 @@
 {
-  "name": "import-service",
+  "name": "authorization-service",
   "version": "1.0.0",
-  "description": "Service for importing files",
+  "description": "Authorization service",
   "scripts": {
     "test": "jest",
     "deploy": "sls deploy",
@@ -12,8 +12,6 @@
     "node": ">=14.15.0"
   },
   "dependencies": {
-    "aws-sdk": "^2.1244.0",
-    "csv-parser": "^3.0.0",
     "ts-loader": "^9.4.1"
   },
   "devDependencies": {
